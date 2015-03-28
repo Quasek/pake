@@ -143,6 +143,11 @@ class Variable:
     def __str__(self):
         return "${}.{} = {!s} ".format(self.module, self.name, self.content)
 
+    def __bool__(self):
+        return self.module or self.name or len(self.content) > 0
+
+    __nonzero__=__bool__
+
     def eval(self):
         def eval_not_str(e):
             return [e] if isinstance(e, str) else e.eval()

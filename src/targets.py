@@ -76,12 +76,12 @@ class Target:
             if phrase:
                 return str(decor) + str(phrase)
             else:
-                return ''
+                return None
 
         ra = decorate_not_empty(self.common_parameters.run_after, "run after: ")
         rb = decorate_not_empty(self.common_parameters.run_before, "run before: ")
 
-        params = ','.join([ra, rb])
+        params = ','.join(filter(None, [ra, rb]))
 
         return '{name} ({params})'.format(name=self.common_parameters.name,
                                           params=' '.join([self.type_string(),
